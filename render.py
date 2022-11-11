@@ -1,0 +1,21 @@
+import conf, runtime
+
+def render (g, scr):
+	# Print the box
+	if conf.has_border:
+		scr.addstr(0, 0, conf.line_ul + (conf.line_ux * (runtime.resolution_term[0] - 2)) + \
+			conf.line_ur)
+		for i in range(1, runtime.resolution_term[1] - 3):
+			scr.addch(i, 0, conf.line_xl)
+			scr.addch(i, runtime.resolution_term[0] - 1, conf.line_xr)
+		scr.addstr(conf.line_ll + (conf.line_lx * (runtime.resolution_term[0] - 2)) + conf.line_lr)
+
+	# Print out the blocks
+	x_count = 1
+	y_count = 1
+	for i in g:
+		for j in i:
+			j.render(conf.block_size[0] * x_count, conf.block_size[1] * y_count, scr)
+			x_count += 1
+		x_count = 1
+		y_count += 1
