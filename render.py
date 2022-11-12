@@ -19,3 +19,8 @@ def render (g, scr):
 			x_count += 1
 		x_count = 1
 		y_count += 1
+	scr.addch(conf.block_size[1] * (runtime.index[1] + 1), conf.block_size[0] * (runtime.index[0] + 1), 'i')
+
+	# Add message at the bottom of the window
+	scr.addstr(runtime.resolution_term[1] - 2, 0, runtime.message)
+	scr.clrtoeol()

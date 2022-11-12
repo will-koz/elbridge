@@ -1,6 +1,6 @@
 ascii = False
 
-block_size = (4, 2) # (width, height)
+block_size = (8, 4) # (width, height) # TODO revert this to 4, 2 or even 2, 1
 
 # color_BLUE = 1
 # color_DARKBLUE = 2
