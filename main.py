@@ -2,12 +2,12 @@
 
 import time
 
-import game, grid, interface, render, runtime
+import conf, game, grid, interface, render, runtime
 
 runtime.stdscr = interface.intinit()
 runtime.resolution_game = interface.getres(runtime.stdscr)
 runtime.game_grid = grid.generate_grid(runtime.resolution_game[0], runtime.resolution_game[1])
-runtime.message = "Beginning %dx%d game." % (runtime.resolution_game[0], runtime.resolution_game[1])
+runtime.message = conf.lang_beginning % (runtime.resolution_game[0], runtime.resolution_game[1])
 
 exit_requested = False
 while not exit_requested:

@@ -13,7 +13,7 @@ class Block:
 
 		self.selected = False
 
-	def render (self, x, y, stdscr, idx = False):
+	def render (self, x, y, stdscr):
 		args = curses.color_pair(0)
 		if self.color[0] == 1:
 			args = curses.color_pair(1)

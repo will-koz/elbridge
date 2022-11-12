@@ -16,9 +16,9 @@ def render (g, scr):
 	for i in g:
 		for j in i:
 			j.render(conf.block_size[0] * x_count, conf.block_size[1] * y_count, scr)
-			x_count += 1
-		x_count = 1
-		y_count += 1
+			y_count += 1
+		y_count = 1
+		x_count += 1
 	scr.addch(conf.block_size[1] * (runtime.index[1] + 1), conf.block_size[0] * (runtime.index[0] + 1), 'i')
 
 	# Add message at the bottom of the window

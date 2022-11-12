@@ -11,6 +11,10 @@ difficulty = 3
 fill = " "
 has_border = True
 
+lang_beginning = "Beginning %dx%d game."
+lang_deselected = "Deselected %d, %d (%d blocks selected)"
+lang_selected = "Selected %d, %d (%d blocks selected)"
+
 line_ul = "/" if ascii else "\u250C"
 line_ux = "-" if ascii else "\u2500"
 line_ur = "\\" if ascii else "\u2510"
