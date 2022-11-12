@@ -14,12 +14,11 @@ class Block:
 		self.selected = False
 
 	def render (self, x, y, stdscr):
-		args = curses.color_pair(0)
-		if self.color[0] == 1:
-			args = curses.color_pair(1)
-		elif self.color[0] == 2:
-			args = curses.color_pair(2)
+		args = curses.color_pair(self.color[0])
 		character = conf.fill
+		if self.color[1] > 0:
+			args = curses.color_pair(self.color[1])
+			character = conf.filled
 		if self.selected: # TODO make a better rendition
 			character = "s"
 		for i in range(conf.block_size[1]):

@@ -1,3 +1,4 @@
+import math
 import conf, runtime
 
 def render (g, scr):
@@ -23,4 +24,12 @@ def render (g, scr):
 
 	# Add message at the bottom of the window
 	scr.addstr(runtime.resolution_term[1] - 2, 0, runtime.message)
+	scr.clrtoeol()
+
+	# Add results to bottom of the window
+	red_side = conf.lang_results[0] % (runtime.scores[0], math.floor(runtime.scores[0] / \
+		runtime.resolution_game[0] / runtime.resolution_game[1] * 100))
+	blue_side = conf.lang_results[1] % (runtime.scores[1], math.floor(runtime.scores[1] / \
+		runtime.resolution_game[0] / runtime.resolution_game[1] * 100))
+	scr.addstr(runtime.resolution_term[1] - 1, 0, red_side + blue_side)
 	scr.clrtoeol()

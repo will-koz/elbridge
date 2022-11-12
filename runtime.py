@@ -5,5 +5,6 @@ message = ""
 resolution_game = (0, 0)
 resolution_term = (0, 0)
 
+scores = [0, 0]
 selected = []
 stdscr = None
