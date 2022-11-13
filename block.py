@@ -40,3 +40,21 @@ class Block:
 			for i in range(conf.block_pixel_size[1]):
 				stdscr.addstr(y + i, x + conf.block_size[0] - conf.block_pixel_size[0], character \
 					* conf.block_pixel_size[0], args)
+		if self.bounds[3]:
+			for i in range(conf.block_pixel_size[1], conf.block_size[1] - conf.block_pixel_size[1]):
+				stdscr.addstr(y + i, x + conf.block_size[0] - conf.block_pixel_size[0], character \
+					* conf.block_pixel_size[0], args)
+		if self.bounds[4]:
+			for i in range(conf.block_size[1] - conf.block_pixel_size[1], conf.block_size[1]):
+				stdscr.addstr(y + i, x + conf.block_size[0] - conf.block_pixel_size[0], character \
+					* conf.block_pixel_size[0], args)
+		if self.bounds[5]:
+			for i in range(conf.block_size[1] - conf.block_pixel_size[1], conf.block_size[1]):
+				stdscr.addstr(y + i, x + conf.block_pixel_size[0], character * (conf.block_size[0] \
+					- 2), args)
+		if self.bounds[6]:
+			for i in range(conf.block_size[1] - conf.block_pixel_size[1], conf.block_size[1]):
+				stdscr.addstr(y + i, x, character * conf.block_pixel_size[0], args)
+		if self.bounds[7]:
+			for i in range(conf.block_pixel_size[1], conf.block_size[1] - conf.block_pixel_size[1]):
+				stdscr.addstr(y + i, x, character * conf.block_pixel_size[0], args)

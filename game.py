@@ -33,6 +33,12 @@ def create_district ():
 			runtime.game_grid[i[0]][i[1]].bounds[0] = True
 		if not is_shared_block([i[0] - 1, i[1] - 1]): # Edge above left
 			runtime.game_grid[i[0]][i[1]].bounds[0] = True
+		if not is_shared_block([i[0] + 1, i[1] - 1]): # Edge above right
+			runtime.game_grid[i[0]][i[1]].bounds[2] = True
+		if not is_shared_block([i[0] + 1, i[1] + 1]): # Edge below right
+			runtime.game_grid[i[0]][i[1]].bounds[4] = True
+		if not is_shared_block([i[0] - 1, i[1] + 1]): # Edge below left
+			runtime.game_grid[i[0]][i[1]].bounds[6] = True
 	if reds == (district_size / 2):
 		runtime.message = conf.lang_equ % (reds, district_size)
 		return
