@@ -11,8 +11,28 @@ def create_district ():
 		return # has to be between the district size minimum and maximum
 	reds = 0
 	for i in runtime.selected:
+		# Get a count of the colors
 		if runtime.game_grid[i[0]][i[1]].color[0] == 1:
 			reds += 1
+		# Figure out the bounds of the district
+		if not is_shared_block([i[0], i[1] - 1]): # Edge above
+			runtime.game_grid[i[0]][i[1]].bounds[0] = True
+			runtime.game_grid[i[0]][i[1]].bounds[1] = True
+			runtime.game_grid[i[0]][i[1]].bounds[2] = True
+		if not is_shared_block([i[0] + 1, i[1]]): # Edge right
+			runtime.game_grid[i[0]][i[1]].bounds[2] = True
+			runtime.game_grid[i[0]][i[1]].bounds[3] = True
+			runtime.game_grid[i[0]][i[1]].bounds[4] = True
+		if not is_shared_block([i[0], i[1] + 1]): # Edge below
+			runtime.game_grid[i[0]][i[1]].bounds[4] = True
+			runtime.game_grid[i[0]][i[1]].bounds[5] = True
+			runtime.game_grid[i[0]][i[1]].bounds[6] = True
+		if not is_shared_block([i[0] - 1, i[1]]): # Edge left
+			runtime.game_grid[i[0]][i[1]].bounds[6] = True
+			runtime.game_grid[i[0]][i[1]].bounds[7] = True
+			runtime.game_grid[i[0]][i[1]].bounds[0] = True
+		if not is_shared_block([i[0] - 1, i[1] - 1]): # Edge above left
+			runtime.game_grid[i[0]][i[1]].bounds[0] = True
 	if reds == (district_size / 2):
 		runtime.message = conf.lang_equ % (reds, district_size)
 		return
@@ -45,6 +65,14 @@ def handle_input (x):
 		toggle_select(runtime.index)
 	elif x == ord('\n'):
 		create_district()
+
+def is_shared_block (x):
+	if x[0] < 0 or x[1] < 0:
+		return False
+	if x[0] >= runtime.resolution_game[0] or x[1] >= runtime.resolution_game[1]:
+		return False
+	else:
+		return runtime.game_grid[x[0]][x[1]].selected
 
 def removeall(list, x):
 	new_list = []

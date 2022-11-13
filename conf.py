@@ -2,15 +2,19 @@ ascii = False
 
 block_pixel_size = (2, 1)
 
-# (width, height) # TODO revert this to 4, 2 or even 2, 1
+# (width, height) # TODO revert this to (4, 2) or even (2, 1)
 block_size = tuple(map(lambda x : x * 4, block_pixel_size))
 # block_size = tuple(map(lambda x : x * 2, block_pixel_size))
 # block_size = tuple(map(lambda x : x * 1, block_pixel_size))
 
+block_tiny = True if block_size[0] <= 2 or block_size[1] <= 2 else False
+
 difficulty = 3
 district_s = [6, 8] # district size
 fill = " "
-filled = "#" if ascii else "\u2593"
+filled = "#" if ascii else "\u2592"
+filled2 = "#" if ascii else "\u2593"
+filled3 = "#" if ascii else "\u2588"
 has_border = True
 
 lang_beginning = "Beginning %dx%d game."

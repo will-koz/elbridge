@@ -12,6 +12,7 @@ class Block:
 		self.color[0] = 1 if random.random() < (1 / conf.difficulty) else 2
 
 		self.selected = False
+		self.bounds = [False] * 8
 
 	def render (self, x, y, stdscr):
 		args = curses.color_pair(self.color[0])
@@ -23,3 +24,19 @@ class Block:
 			character = "s"
 		for i in range(conf.block_size[1]):
 			stdscr.addstr(y + i, x, character * conf.block_size[0], args)
+
+		# Now render the edges
+		if self.color[1] == 0:
+			return
+		character = conf.filled2
+		if self.bounds[0]:
+			for i in range(conf.block_pixel_size[1]):
+				stdscr.addstr(y + i, x, character * conf.block_pixel_size[0], args)
+		if self.bounds[1]:
+			for i in range(conf.block_pixel_size[1]):
+				stdscr.addstr(y + i, x + conf.block_pixel_size[0], character * (conf.block_size[0] \
+					- 2), args)
+		if self.bounds[2]:
+			for i in range(conf.block_pixel_size[1]):
+				stdscr.addstr(y + i, x + conf.block_size[0] - conf.block_pixel_size[0], character \
+					* conf.block_pixel_size[0], args)

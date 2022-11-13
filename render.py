@@ -1,4 +1,4 @@
-import curses
+import curses, math
 
 import conf, interface, runtime
 
@@ -21,7 +21,30 @@ def render (g, scr):
 			y_count += 1
 		y_count = 1
 		x_count += 1
-	scr.addch(conf.block_size[1] * (runtime.index[1] + 1), conf.block_size[0] * (runtime.index[0] + 1), 'i')
+
+	# Render index
+	if conf.block_tiny:
+		# Color in the left half of each block
+		for i in range(conf.block_size[1]):
+			scr.addstr(conf.block_size[1] * (runtime.index[1] + 1) + i, conf.block_size[0] * \
+				(runtime.index[0] + 1), conf.filled3 * math.ceil(conf.block_size[0] / 2), \
+				curses.color_pair(0))
+	else:
+		for i in range(conf.block_pixel_size[1]):
+			scr.addstr(conf.block_size[1] * (runtime.index[1] + 1) + i, conf.block_size[0] * \
+				(runtime.index[0] + 1), conf.filled3 * conf.block_size[0], curses.color_pair(0))
+		for i in range(conf.block_pixel_size[1], conf.block_pixel_size[1] * (conf.block_size[1] - \
+			1)):
+			scr.addstr(conf.block_size[1] * (runtime.index[1] + 1) + i, conf.block_size[0] * \
+				(runtime.index[0] + 1), conf.filled3 * conf.block_pixel_size[0], curses.color_pair(0))
+		for i in range(conf.block_pixel_size[1], conf.block_pixel_size[1] * (conf.block_size[1] - \
+			1)):
+			scr.addstr(conf.block_size[1] * (runtime.index[1] + 1) + i, conf.block_size[0] * \
+				(runtime.index[0] + 2) - conf.block_pixel_size[0], conf.filled3 * \
+				conf.block_pixel_size[0], curses.color_pair(0))
+		for i in range(-1, conf.block_pixel_size[1] - 1):
+			scr.addstr(conf.block_size[1] * (runtime.index[1] + 2) + i, conf.block_size[0] * \
+				(runtime.index[0] + 1), conf.filled3 * conf.block_size[0], curses.color_pair(0))
 
 	# Add message at the bottom of the window
 	scr.addstr(runtime.resolution_term[1] - 2, 0, runtime.message)
@@ -42,7 +65,6 @@ def render (g, scr):
 		runtime.resolution_term[0] - round(blue_part * runtime.resolution_term[0]) - 1)]
 	third_part = full_string[(runtime.resolution_term[0] - round(blue_part * \
 		runtime.resolution_term[0]) - 1):]
-	# scr.addstr(runtime.resolution_term[1] - 1, 0, str(runtime.resolution_term[0]) + " " + str(len(first_part)) + " " + str(len(sec_part)) + " " + str(len(third_part)) + " " + str(len(first_part) + len(sec_part) + len(third_part)))
 	scr.addstr(runtime.resolution_term[1] - 1, 0, first_part, curses.color_pair(1))
 	scr.clrtoeol()
 	scr.addstr(sec_part, curses.color_pair(0))
