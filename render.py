@@ -1,5 +1,6 @@
-import math
-import conf, runtime
+import curses
+
+import conf, interface, runtime
 
 def render (g, scr):
 	# Print the box
@@ -27,9 +28,23 @@ def render (g, scr):
 	scr.clrtoeol()
 
 	# Add results to bottom of the window
-	red_side = conf.lang_results[0] % (runtime.scores[0], math.floor(runtime.scores[0] / \
-		runtime.resolution_game[0] / runtime.resolution_game[1] * 100))
-	blue_side = conf.lang_results[1] % (runtime.scores[1], math.floor(runtime.scores[1] / \
-		runtime.resolution_game[0] / runtime.resolution_game[1] * 100))
-	scr.addstr(runtime.resolution_term[1] - 1, 0, red_side + blue_side)
+	red_part = runtime.scores[0] / runtime.resolution_game[0] / runtime.resolution_game[1]
+	blue_part = runtime.scores[1] / runtime.resolution_game[0] / runtime.resolution_game[1]
+	red_side = conf.lang_results[0] % (runtime.scores[0], round(red_part * 100))
+	blue_side = conf.lang_results[1] % (runtime.scores[1], round(blue_part * 100))
+	num_spaces = 1
+	if sum(runtime.scores) == runtime.resolution_game[0] * runtime.resolution_game[1]:
+ 		num_spaces = 2
+	full_string = " " * (runtime.resolution_term[0] - len(red_side) - len(blue_side) - num_spaces)
+	full_string = red_side + full_string + blue_side
+	first_part = full_string[:round(red_part * runtime.resolution_term[0])]
+	sec_part = full_string[round(red_part * runtime.resolution_term[0]):( \
+		runtime.resolution_term[0] - round(blue_part * runtime.resolution_term[0]) - 1)]
+	third_part = full_string[(runtime.resolution_term[0] - round(blue_part * \
+		runtime.resolution_term[0]) - 1):]
+	# scr.addstr(runtime.resolution_term[1] - 1, 0, str(runtime.resolution_term[0]) + " " + str(len(first_part)) + " " + str(len(sec_part)) + " " + str(len(third_part)) + " " + str(len(first_part) + len(sec_part) + len(third_part)))
+	scr.addstr(runtime.resolution_term[1] - 1, 0, first_part, curses.color_pair(1))
 	scr.clrtoeol()
+	scr.addstr(sec_part, curses.color_pair(0))
+	scr.clrtoeol()
+	scr.addstr(third_part, curses.color_pair(2))

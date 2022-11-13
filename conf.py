@@ -1,15 +1,11 @@
 ascii = False
 
+block_pixel_size = (2, 1)
+
 # (width, height) # TODO revert this to 4, 2 or even 2, 1
-block_size = (8, 4)
-# block_size = (4, 2)
-# block_size = (2, 1)
-
-
-# color_BLUE = 1
-# color_DARKBLUE = 2
-# color_DARKRED = 3
-# color_RED = 4
+block_size = tuple(map(lambda x : x * 4, block_pixel_size))
+# block_size = tuple(map(lambda x : x * 2, block_pixel_size))
+# block_size = tuple(map(lambda x : x * 1, block_pixel_size))
 
 difficulty = 3
 district_s = [6, 8] # district size

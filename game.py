@@ -61,5 +61,5 @@ def select (x):
 def toggle_select (x):
 	if runtime.game_grid[x[0]][x[1]].selected:
 		deselect(x)
-	else:
+	elif runtime.game_grid[x[0]][x[1]].color[1] == 0:
 		select(x)
