@@ -15,6 +15,7 @@ def create_district ():
 		if runtime.game_grid[i[0]][i[1]].color[0] == 1:
 			reds += 1
 		# Figure out the bounds of the district
+		runtime.game_grid[i[0]][i[1]].bounds = [False] * 8
 		if not is_shared_block([i[0], i[1] - 1]): # Edge above
 			runtime.game_grid[i[0]][i[1]].bounds[0] = True
 			runtime.game_grid[i[0]][i[1]].bounds[1] = True
@@ -58,6 +59,33 @@ def deselect (x):
 	runtime.selected = removeall(runtime.selected, x)
 	runtime.message = conf.lang_deselected % (x[0] + 1, x[1] + 1, len(runtime.selected))
 
+def determine_continuous (x):
+	new_list = []
+	for i in x:
+		new_list.append((i, False))
+	delete_touching (new_list, 0)
+	for i in new_list:
+		if not i[1]:
+			return False
+	return True
+
+def delete_touching (list, x):
+	# Actually only marks items for deletion
+	list[x] = (list[x][0], True)
+	count = 0
+	while count < len(list):
+		if (not list[count][1]) and distance(list[x][0], list[count][0]) <= 1:
+			delete_touching(list, count)
+		count += 1
+
+def distance (x, y):
+	if conf.count_corners:
+		# Return the Chebyshev distance of two points
+		return max(abs(x[0] - y[0]), abs(x[1] - y[1]))
+	else:
+		# Return the Taxicab distance of two points
+		return abs(x[0] - y[0]) + abs(x[1] - y[1])
+
 def handle_input (x):
 	if x == curses.KEY_UP or x == ord('k') or x == ord('w'):
 		runtime.index[1] = max(runtime.index[1] - 1, 0)
@@ -90,7 +118,9 @@ def removeall(list, x):
 def select (x):
 	runtime.game_grid[x[0]][x[1]].selected = True
 	runtime.selected.append(x[:])
+	# determine_continuous(runtime.selected)
 	runtime.message = conf.lang_selected % (x[0] + 1, x[1] + 1, len(runtime.selected))
+	runtime.message += " (Continuous)" if determine_continuous(runtime.selected) else " (Not Cont.)"
 
 def toggle_select (x):
 	if runtime.game_grid[x[0]][x[1]].selected:

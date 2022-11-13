@@ -10,7 +10,8 @@ block_size = tuple(map(lambda x : x * 3, block_pixel_size))
 
 block_tiny = True if block_size[0] <= 2 or block_size[1] <= 2 else False
 
-difficulty = 2.5
+count_corners = False
+difficulty = 3
 district_s = [5, 9] # district size
 fill = " "
 filled = "#" if ascii else "\u2592"
