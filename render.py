@@ -47,7 +47,7 @@ def render (g, scr):
 				(runtime.index[0] + 1), conf.filled3 * conf.block_size[0], curses.color_pair(0))
 
 	# Add message at the bottom of the window
-	scr.addstr(runtime.resolution_term[1] - 2, 0, runtime.message)
+	scr.addnstr(runtime.resolution_term[1] - 2, 0, runtime.message, runtime.resolution_term[0] - 1)
 	scr.clrtoeol()
 
 	# Add results to bottom of the window

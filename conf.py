@@ -3,8 +3,8 @@ ascii = False
 block_pixel_size = (2, 1)
 
 # (width, height) # TODO revert this to (4, 2) or even (2, 1)
-# block_size = tuple(map(lambda x : x * 4, block_pixel_size))
-block_size = tuple(map(lambda x : x * 3, block_pixel_size))
+block_size = tuple(map(lambda x : x * 4, block_pixel_size))
+# block_size = tuple(map(lambda x : x * 3, block_pixel_size))
 # block_size = tuple(map(lambda x : x * 2, block_pixel_size))
 # block_size = tuple(map(lambda x : x * 1, block_pixel_size))
 
@@ -20,11 +20,14 @@ filled3 = "#" if ascii else "\u2588"
 has_border = True
 
 lang_beginning = "Beginning %dx%d game."
-lang_deselected = "Deselected %d, %d (%d blocks selected)"
+lang_continuous = "(selection is%scontinuous)"
+lang_deselected = "Deselected %d, %d : %d blocks selected"
 lang_equ = "District is evenly split with %d reds over %d blocks"
 lang_newdistrict = "Successfully created new %s district"
+lang_notcontinuous = "In real life, you might be able to get away with that, but here districts \
+need to be continuous"
 lang_results = ["Red: %d (%d%%)", "Blue: %d (%d%%)"]
-lang_selected = "Selected %d, %d (%d blocks selected)"
+lang_selected = "Selected %d, %d : %d blocks selected"
 lang_wrongsize = "Districts should be between %d and %d, not %d blocks"
 
 line_ul = "/" if ascii else "\u250C"

@@ -9,6 +9,9 @@ def create_district ():
 		runtime.message = conf.lang_wrongsize % (conf.district_s[0], conf.district_s[1], \
 			district_size)
 		return # has to be between the district size minimum and maximum
+	if not determine_continuous(runtime.selected):
+		runtime.message = conf.lang_notcontinuous
+		return # has to be a continuous selection of land
 	reds = 0
 	for i in runtime.selected:
 		# Get a count of the colors
@@ -63,6 +66,8 @@ def determine_continuous (x):
 	new_list = []
 	for i in x:
 		new_list.append((i, False))
+	if len(new_list) == 0:
+		return False
 	delete_touching (new_list, 0)
 	for i in new_list:
 		if not i[1]:
@@ -120,10 +125,11 @@ def select (x):
 	runtime.selected.append(x[:])
 	# determine_continuous(runtime.selected)
 	runtime.message = conf.lang_selected % (x[0] + 1, x[1] + 1, len(runtime.selected))
-	runtime.message += " (Continuous)" if determine_continuous(runtime.selected) else " (Not Cont.)"
 
 def toggle_select (x):
 	if runtime.game_grid[x[0]][x[1]].selected:
 		deselect(x)
 	elif runtime.game_grid[x[0]][x[1]].color[1] == 0:
 		select(x)
+	runtime.message += " " + conf.lang_continuous % (" " if determine_continuous(runtime.selected) \
+		else " not ")
