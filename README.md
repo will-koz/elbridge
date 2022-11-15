@@ -23,6 +23,7 @@ gerrymandering
 - [ ] Add blocks with no population?
 - [ ] Add a button for finishing a game
 - [ ] Test on some other platforms
+  - [ ] Add Installation > Microsoft Windows
   - [x] Make this public
   - [ ] Finish making this a proper repo
     - [ ] Make a good README
