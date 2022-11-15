@@ -1,5 +1,11 @@
 ascii = False
 
+banner_lost = [
+	# TODO
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+banner_won = []
+
 block_pixel_size = (2, 1)
 
 # (width, height) # TODO revert this to (4, 2) or even (2, 1)

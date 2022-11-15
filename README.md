@@ -11,6 +11,10 @@ Elbridge is a CLI Gerrymandering game.
 There are no additional requirements for installation (requirements.txt is just for Microsoft
 Windows).
 
+### Microsoft Windows
+
+<!-- TODO -->
+
 ## Running
 
 On *nix, run `./main.py` and on Microsoft Windows, run `py main.py` in the directory you cloned to.
