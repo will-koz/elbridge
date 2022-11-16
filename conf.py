@@ -46,12 +46,13 @@ banner_won = [
 ]
 
 block_pixel_size = (2, 1)
+# block_scale = 4
+block_scale = 3
+# block_scale = 2
+# block_scale = 1
 
 # (width, height) # TODO revert this to (4, 2) or even (2, 1)
-# block_size = tuple(map(lambda x : x * 4, block_pixel_size))
-block_size = tuple(map(lambda x : x * 3, block_pixel_size))
-# block_size = tuple(map(lambda x : x * 2, block_pixel_size))
-# block_size = tuple(map(lambda x : x * 1, block_pixel_size))
+block_size = tuple(map(lambda x : x * block_scale, block_pixel_size))
 
 block_tiny = True if block_size[0] <= 2 or block_size[1] <= 2 else False
 

@@ -27,7 +27,7 @@ gerrymandering
 - [ ] Add a new visual cue for selected blocks
 - [ ] Add blocks with no population?
 - [x] Add a button for finishing a game (f button)
-  - [ ] Specify quit and finish buttons in configuration file
+  - [x] Specify quit and finish buttons in configuration file
 - [ ] Test on some other platforms
   - [ ] Add Installation > Microsoft Windows
   - [x] Make this public
