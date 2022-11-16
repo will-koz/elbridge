@@ -1,6 +1,6 @@
 # Elbridge
 
-Elbridge is a CLI Gerrymandering game.
+Elbridge is a TUI Gerrymandering game.
 
 ## Installation
 

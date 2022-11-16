@@ -1,3 +1,4 @@
+final_screen_requested = False
 game_grid = []
 index = [0, 0]
 message = ""

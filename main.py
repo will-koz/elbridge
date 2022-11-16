@@ -15,8 +15,15 @@ while not exit_requested:
 	character = runtime.stdscr.getch()
 	if character == ord('q'): # Maybe set the character in conf
 		exit_requested = True
+	elif character == ord('f'): # Also maybe set this character in conf TODO
+		exit_requested = True
+		runtime.final_screen_requested = True
 	else:
 		# Handle character
 		game.handle_input(character)
+
+if runtime.final_screen_requested:
+	render.render_banner(conf.banner_won)
+	runtime.stdscr.getch()
 
 interface.intterm(runtime.stdscr)
