@@ -7,8 +7,6 @@ class Block:
 		# First number is self color. Second number is district color.
 		# 0 is undecided district or nonexistant population, 1 is red, 2 is blue
 		self.color = [0, 0]
-
-		# TODO add a way for nonexistant populations to exist in a block
 		self.color[0] = 1 if random.random() < (1 / conf.difficulty) else 2
 
 		self.selected = False

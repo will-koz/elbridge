@@ -28,7 +28,6 @@ On *nix run `./main.py`, and on Microsoft Windows run `py main.py` in the direct
 - [x] Make a menu for setting game information and opening more information in web browser about
 gerrymandering
 - [x] Add a new visual cue for selected blocks
-- [ ] Add blocks with no population?
 - [x] Add a button for finishing a game (f button)
   - [x] Specify quit and finish buttons in configuration file
 - [ ] Test on some other platforms
