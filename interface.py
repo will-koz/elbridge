@@ -2,6 +2,19 @@ import curses
 
 import conf, runtime
 
+def constrain (value, bounds, adds):
+	# Basic mathematical function that adds (or subtracts), but keeps it bounded according to bounds
+	is_int = isinstance(value, int)
+	value += bounds[2] if adds else -bounds[2]
+	value = value if value <= bounds[1] else bounds[1]
+	value = value if value >= bounds[0] else bounds[0]
+	value *= 10 ** conf.sigfigs
+	value = round(value)
+	value /= 10 ** conf.sigfigs
+	if is_int:
+		value = int(value)
+	return value
+
 # GET RESolution
 def getres (stdscr):
 	width, height = runtime.resolution_term

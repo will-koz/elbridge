@@ -8,4 +8,5 @@ resolution_term = (0, 0)
 
 scores = [0, 0]
 selected = []
+selected_menu_item = 1
 stdscr = None

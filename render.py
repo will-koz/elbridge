@@ -5,6 +5,32 @@ import conf, interface, runtime
 def main_menu ():
 	runtime.stdscr.erase()
 	render_banner(conf.banner_name, _y = 0)
+	y = len(conf.banner_name)
+	print_outs = [
+		conf.lang_begin,
+		main_menu_item(conf.settings_block_scale[3], conf.block_scale),
+		main_menu_item(conf.lang_count_corners, conf.count_corners),
+		main_menu_item(conf.settings_difficulty[3], conf.difficulty),
+		main_menu_item(conf.settings_district_size_min[3], conf.district_s[0]),
+		main_menu_item(conf.settings_district_size_max[3], conf.district_s[1]),
+		main_menu_item(conf.settings_finished_points[3], conf.finished_points),
+	]
+	for i in conf.pages:
+		print_outs.append(i[0])
+	print_outs[runtime.selected_menu_item] = ' ' + print_outs[runtime.selected_menu_item] + ' '
+	for i in range(len(print_outs)):
+		y += 2
+		right_column = round(conf.column_size * runtime.resolution_term[0])
+		args = curses.color_pair(2) if (runtime.selected_menu_item == i) else curses.color_pair(0)
+		if y < runtime.resolution_term[1]:
+			runtime.stdscr.addstr(y, right_column - (1 if runtime.selected_menu_item == i else 0), \
+				print_outs[i], args)
+
+def main_menu_item (string, val):
+	width = int(runtime.resolution_term[0] * (1 - 2 * conf.column_size))
+	final_string = str(val)
+	final_string = string + (' ' * (width - len(string) - len(final_string))) + final_string
+	return final_string
 
 def render (g, scr):
 	runtime.stdscr.erase()

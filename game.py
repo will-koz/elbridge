@@ -1,6 +1,6 @@
-import curses
+import curses, webbrowser
 
-import conf, runtime
+import conf, interface, runtime
 
 def create_district ():
 	# TODO make sure that each district is continuous
@@ -92,17 +92,17 @@ def distance (x, y):
 		return abs(x[0] - y[0]) + abs(x[1] - y[1])
 
 def handle_input (x):
-	if x == curses.KEY_UP or x == ord('k') or x == ord('w'):
+	if conf.button_up(x):
 		runtime.index[1] = max(runtime.index[1] - 1, 0)
-	elif x == curses.KEY_DOWN or x == ord('j') or x == ord('s'):
+	elif conf.button_down(x):
 		runtime.index[1] = min(runtime.index[1] + 1, runtime.resolution_game[1] - 1)
-	elif x == curses.KEY_LEFT or x == ord('h') or x == ord('a'):
+	elif conf.button_left(x):
 		runtime.index[0] = max(runtime.index[0] - 1, 0)
-	elif x == curses.KEY_RIGHT or x == ord('l') or x == ord('d'):
+	elif conf.button_right(x):
 		runtime.index[0] = min(runtime.index[0] + 1, runtime.resolution_game[0] - 1)
-	elif x == ord(' '):
+	elif x == conf.button_sel:
 		toggle_select(runtime.index)
-	elif x == ord('\n'):
+	elif x == conf.button_next:
 		create_district()
 
 def is_shared_block (x):
@@ -112,6 +112,37 @@ def is_shared_block (x):
 		return False
 	else:
 		return runtime.game_grid[x[0]][x[1]].selected
+
+def main_menu_input (x):
+	if conf.button_up(x):
+		runtime.selected_menu_item = interface.constrain(runtime.selected_menu_item, (1, 11, 1), \
+			False)
+	elif conf.button_down(x):
+		runtime.selected_menu_item = interface.constrain(runtime.selected_menu_item, (1, 11, 1), \
+			True)
+	elif conf.button_left(x) or conf.button_right(x):
+		# Gosh I wish python had enums
+		if runtime.selected_menu_item == 1:
+			conf.block_scale = interface.constrain(conf.block_scale, conf.settings_block_scale, \
+				True if conf.button_right(x) else False)
+		if runtime.selected_menu_item == 2:
+			conf.count_corners = not conf.count_corners
+		if runtime.selected_menu_item == 3:
+			conf.difficulty = interface.constrain(conf.difficulty, conf.settings_difficulty, True \
+				if conf.button_right(x) else False)
+		if runtime.selected_menu_item == 4:
+			conf.district_s[0] = interface.constrain(conf.district_s[0], \
+				conf.settings_district_size_min, True if conf.button_right(x) else False)
+		if runtime.selected_menu_item == 5:
+			conf.district_s[1] = interface.constrain(conf.district_s[1], \
+				conf.settings_district_size_max, True if conf.button_right(x) else False)
+		if runtime.selected_menu_item == 6:
+			conf.finished_points = interface.constrain(conf.finished_points, \
+				conf.settings_finished_points, True if conf.button_right(x) else False)
+	elif x == conf.button_sel:
+		if runtime.selected_menu_item > 6:
+			webbrowser.open(conf.pages[runtime.selected_menu_item - 7][1])
+	conf.district_s.sort()
 
 def removeall(list, x):
 	new_list = []

@@ -21,7 +21,7 @@ class Block:
 			args = curses.color_pair(self.color[1])
 			character = conf.filled
 		if self.selected: # TODO make a better rendition
-			character = "s"
+			character = conf.selected
 		for i in range(conf.block_size[1]):
 			stdscr.addstr(y + i, x, character * conf.block_size[0], args)
 

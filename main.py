@@ -14,8 +14,10 @@ exit_requested = False
 while not exit_requested:
 	render.main_menu()
 	character = runtime.stdscr.getch()
-	if character == conf.button_next:
+	if character == conf.button_next or character == conf.button_quit:
 		exit_requested = True
+	else:
+		game.main_menu_input(character)
 
 conf.block_size = tuple(map(lambda x : x * conf.block_scale, conf.block_pixel_size))
 conf.block_tiny = True if conf.block_size[0] <= 2 or conf.block_size[1] <= 2 else False

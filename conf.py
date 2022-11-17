@@ -1,3 +1,5 @@
+import curses
+
 ascii = False
 
 banner_lost = [
@@ -80,21 +82,33 @@ block_size = block_pixel_size # This is overwritten in main.py
 # block_tiny = True if block_size[0] <= 2 or block_size[1] <= 2 else False
 block_tiny = True # This is overwritten in main.py
 
+# TODO all buttons should be here
 button_finish = ord('f')
 button_next = ord('\n')
 button_quit = ord('q')
+button_sel = ord(' ')
+
+button_up = lambda x : x == curses.KEY_UP or x == ord('k') or x == ord('w')
+button_down = lambda x : x == curses.KEY_DOWN or x == ord('j') or x == ord('s')
+button_left = lambda x : x == curses.KEY_LEFT or x == ord('h') or x == ord('a')
+button_right = lambda x : x == curses.KEY_RIGHT or x == ord('l') or x == ord('d')
+
+column_size = 1 / 3 # Only used on main menus
 
 count_corners = False
-difficulty = 3
+difficulty = 3.0
 district_s = [5, 9] # district size
 fill = " "
 filled = "#" if ascii else "\u2592"
 filled2 = "#" if ascii else "\u2593"
 filled3 = "#" if ascii else "\u2588"
+finished_points = 0.1
 has_border = True
 
+lang_begin = "Press ENTER to begin the game..."
 lang_beginning = "Beginning %dx%d game."
 lang_continuous = "(selection is%scontinuous)"
+lang_count_corners = "Count corners:"
 lang_deselected = "Deselected %d, %d : %d blocks selected"
 lang_equ = "District is evenly split with %d reds over %d blocks"
 lang_newdistrict = "Successfully created new %s district"
@@ -112,3 +126,22 @@ line_lr = "/" if ascii else "\u2518"
 line_lx = "-" if ascii else "\u2500"
 line_ll = "\\" if ascii else "\u2514"
 line_xl = "|" if ascii else "\u2502"
+
+pages = [
+	("CGP Grey on the shortest-splitline algo.", "https://www.youtube.com/watch?v=kUS9uvYyn3A"),
+	("Read more about Gerrymandering", "https://wikipedia.org/wiki/Gerrymandering"),
+	("Read more about the Wasted Vote Effect", "https://en.wikipedia.org/wiki/Wasted_vote"),
+	("Read more about shortest-splitline algo.", "https://www.rangevoting.org/GerryExamples.html"),
+	("Ugly Gerry", "http://uglygerry.com/")
+]
+
+selected = "s" if ascii else "\u2584"
+
+settings_block_scale = (1, 8, 1, "Block scale:")
+# settings_count_corners is a boolean
+settings_difficulty = (2, 4, 0.1, "Difficulty:")
+settings_district_size_min = (1, 10, 1, "District Size:")
+settings_district_size_max = (5, 20, 1, "District Size:")
+settings_finished_points = (0, 0.3, 0.01, "Points per block after game end:")
+
+sigfigs = 2
