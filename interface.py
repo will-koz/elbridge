@@ -4,11 +4,10 @@ import conf, runtime
 
 # GET RESolution
 def getres (stdscr):
-	height, width = stdscr.getmaxyx()
-	runtime.resolution_term = (width, height)
+	width, height = runtime.resolution_term
 	height -= 2 # "Progress Bar" and system message
-	width -= 2 * conf.block_size[0]
-	height -= 2 * conf.block_size[1]
+	width -= 2 * conf.block_size[0] # Remove borders
+	height -= 2 * conf.block_size[1] # Remove borders
 	width //= conf.block_size[0]
 	height //= conf.block_size[1]
 	return (width, height)
@@ -31,6 +30,10 @@ def intinit ():
 		# curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
 
 	return stdscr
+
+def initres (stdscr):
+	height, width = stdscr.getmaxyx()
+	runtime.resolution_term = (width, height)
 
 # INTerface TERMinate
 def intterm (stdscr):

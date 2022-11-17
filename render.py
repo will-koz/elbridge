@@ -2,7 +2,12 @@ import curses, math
 
 import conf, interface, runtime
 
+def main_menu ():
+	runtime.stdscr.erase()
+	render_banner(conf.banner_name, _y = 0)
+
 def render (g, scr):
+	runtime.stdscr.erase()
 	# Print the box
 	if conf.has_border:
 		scr.addstr(0, 0, conf.line_ul + (conf.line_ux * (runtime.resolution_term[0] - 2)) + \
@@ -71,12 +76,14 @@ def render (g, scr):
 	scr.clrtoeol()
 	scr.addstr(third_part, curses.color_pair(2))
 
-def render_banner (banner):
+def render_banner (banner, _x = -1, _y = -1):
 	y = (runtime.resolution_term[1] - (conf.block_pixel_size[1] * len(banner))) // 2
 	y = 0 if y < 0 else y
+	y = _y if _y >= 0 else y
 	for i in banner:
 		x = (runtime.resolution_term[0] - (conf.block_pixel_size[0] * len(i))) // 2
 		x = 0 if x < 0 else x
+		x = _x if _x >= 0 else x
 		for j in i:
 			character = conf.filled3 if j == 2 else (conf.filled if j == 1 else conf.fill)
 			character *= conf.block_pixel_size[0]
