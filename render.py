@@ -84,6 +84,7 @@ def render (g, scr):
 	# Add results to bottom of the window
 	red_part = runtime.scores[0] / runtime.resolution_game[0] / runtime.resolution_game[1]
 	blue_part = runtime.scores[1] / runtime.resolution_game[0] / runtime.resolution_game[1]
+
 	red_side = conf.lang_results[0] % (runtime.scores[0], round(red_part * 100))
 	blue_side = conf.lang_results[1] % (runtime.scores[1], round(blue_part * 100))
 	num_spaces = 1

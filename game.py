@@ -1,9 +1,30 @@
 import curses, webbrowser
 
-import conf, interface, runtime
+import conf, interface, render, runtime
+
+def check_game_finished ():
+	if runtime.scores[1] * 2 > runtime.resolution_game[0] * runtime.resolution_game[1]:
+		runtime.final_screen_requested = True
+		return True
+	if runtime.scores[1] + runtime.scores[0] >= runtime.resolution_game[0] * \
+		runtime.resolution_game[1]:
+		runtime.final_screen_requested = True
+		return True
+	return False
+
+def count_final_score ():
+	for i in runtime.game_grid:
+		for j in i:
+			if j.color[1] == 0 and j.color[0] == 1:
+				runtime.scores[0] += conf.finished_points
+				runtime.scores[1] += 1 - conf.finished_points
+			elif j.color[1] == 0:
+				runtime.scores[1] += 1
+	runtime.message = conf.lang_won if runtime.scores[0] > runtime.scores[1] else conf.lang_lost
+	runtime.message %= (runtime.scores[0], runtime.scores[1], round(runtime.scores[0] * 100 / \
+		(runtime.scores[0] + runtime.scores[1])))
 
 def create_district ():
-	# TODO make sure that each district is continuous
 	district_size = len(runtime.selected)
 	if len(runtime.selected) < conf.district_s[0] or len(runtime.selected) > conf.district_s[1]:
 		runtime.message = conf.lang_wrongsize % (conf.district_s[0], conf.district_s[1], \
@@ -90,6 +111,16 @@ def distance (x, y):
 	else:
 		# Return the Taxicab distance of two points
 		return abs(x[0] - y[0]) + abs(x[1] - y[1])
+
+def game_end ():
+	runtime.final_screen_requested = True
+	count_final_score()
+	runtime.stdscr.addnstr(runtime.resolution_term[1] - 2, 0, runtime.message, \
+		runtime.resolution_term[0] - 1)
+	runtime.stdscr.clrtoeol()
+	render.render_banner(conf.banner_won if runtime.scores[0] > runtime.scores[1] else \
+		conf.banner_lost)
+	runtime.stdscr.getch()
 
 def handle_input (x):
 	if conf.button_up(x):

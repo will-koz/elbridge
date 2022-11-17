@@ -34,13 +34,9 @@ def intinit ():
 	curses.start_color()
 	curses.noecho()
 
-	# Color stuff TODO move pair numbers to conf
-	# if conf.ascii:
+	# This is just the official color scheme now. I can't change it.
 	curses.init_pair(1, curses.COLOR_BLACK, curses.COLOR_RED)
 	curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_BLUE)
-	# else:
-		# curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
-		# curses.init_pair(2, curses.COLOR_BLUE, curses.COLOR_BLACK)
 
 	return stdscr
 

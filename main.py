@@ -40,9 +40,10 @@ while not exit_requested:
 	else:
 		# Handle character
 		game.handle_input(character)
+	exit_requested = exit_requested or game.check_game_finished()
 
 if runtime.final_screen_requested:
-	render.render_banner(conf.banner_name)
-	runtime.stdscr.getch()
+	render.render(runtime.game_grid, runtime.stdscr)
+	game.game_end()
 
 interface.intterm(runtime.stdscr)

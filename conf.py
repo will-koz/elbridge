@@ -75,14 +75,13 @@ block_scale = 3
 # block_scale = 2
 # block_scale = 1
 
-# (width, height) # TODO revert this to (4, 2) or even (2, 1)
+# (width, height)
 # block_size = tuple(map(lambda x : x * block_scale, block_pixel_size))
 block_size = block_pixel_size # This is overwritten in main.py
 
 # block_tiny = True if block_size[0] <= 2 or block_size[1] <= 2 else False
 block_tiny = True # This is overwritten in main.py
 
-# TODO all buttons should be here
 button_finish = ord('f')
 button_next = ord('\n')
 button_quit = ord('q')
@@ -111,11 +110,13 @@ lang_continuous = "(selection is%scontinuous)"
 lang_count_corners = "Count corners:"
 lang_deselected = "Deselected %d, %d : %d blocks selected"
 lang_equ = "District is evenly split with %d reds over %d blocks"
+lang_lost = "You lost. Final score: %d-%d (%d%%)"
 lang_newdistrict = "Successfully created new %s district"
 lang_notcontinuous = "In real life, you might be able to get away with that, but here districts \
 need to be continuous"
 lang_results = ["Red: %d (%d%%)", "Blue: %d (%d%%)"]
 lang_selected = "Selected %d, %d : %d blocks selected"
+lang_won = "You won %d-%d! (%d%%)"
 lang_wrongsize = "Districts should be between %d and %d, not %d blocks"
 
 line_ul = "/" if ascii else "\u250C"
