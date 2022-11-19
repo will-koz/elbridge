@@ -20,7 +20,8 @@ curses.
 
 ## Running
 
-On *nix run `./main.py`, and on Microsoft Windows run `py main.py` in the directory you cloned to.
+On *nix run `./main.py`, and on Microsoft Windows run `py main.py` or `python3 main.py` in the
+directory you cloned to.
 
 ## TODO
 - [x] Make a "You Lost" screen and a "Good Game" screen at the end of a game
