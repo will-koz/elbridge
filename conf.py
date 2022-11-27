@@ -1,6 +1,6 @@
 import curses
 
-ascii = False
+ascii = True
 
 banner_lost = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -98,7 +98,7 @@ count_corners = False
 difficulty = 3.0
 district_s = [5, 9] # district size
 fill = " "
-filled = "#" if ascii else "\u2592"
+filled = "." if ascii else "\u2592"
 filled2 = "#" if ascii else "\u2593"
 filled3 = "#" if ascii else "\u2588"
 finished_points = 0.1
