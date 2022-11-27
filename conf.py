@@ -1,6 +1,6 @@
 import curses
 
-ascii = True
+ascii = False
 
 banner_lost = [
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
