@@ -37,3 +37,4 @@ gerrymandering
   - [ ] Finish making this a proper repo
     - [ ] Make a good README
 - [x] Do the remaining TODOs
+- [ ] Install Script?
